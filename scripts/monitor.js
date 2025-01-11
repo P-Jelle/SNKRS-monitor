@@ -32,9 +32,7 @@ fetch(proxyUrl + apiFilter, {
         const productList = document.getElementById("product-list");
 
         products.forEach((product) => {
-            const releaseDetails = (product.productInfo || []).filter(
-                (releaseDetail) => releaseDetail.launchView
-            );
+            const releaseDetails = product.productInfo || [];
 
             releaseDetails.forEach((releaseDetail) => {
                 const title = releaseDetail.productContent?.title || "";
