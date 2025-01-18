@@ -33,7 +33,7 @@ fetch(proxyUrl + apiFilter, {
 
         products.forEach((product) => {
             const releaseDetails = (product.productInfo || []).filter(
-                (releaseDetail) => releaseDetail.launchView
+                (releaseDetail) => releaseDetail.launchView && releaseDetail.merchProduct?.productType === "FOOTWEAR"
             );
 
             releaseDetails.forEach((releaseDetail) => {
