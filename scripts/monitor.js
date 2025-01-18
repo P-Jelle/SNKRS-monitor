@@ -41,7 +41,7 @@ fetch(proxyUrl + apiFilter, {
                 const color = product.publishedContent?.properties?.coverCard?.properties?.title || "";
                 const exclusiveAccess = releaseDetail.merchProduct?.exclusiveAccess ? "Yes" : "No";
                 const launchType = launchConverter[releaseDetail.launchView?.method] || "";
-                const image = product.publishedContent?.nodes[0]?.nodes[0]?.properties?.squarish?.url || "";
+                const image = product.publishedContent?.nodes?.[0]?.nodes?.[0]?.properties?.squarish?.url || "";
                 const date = releaseDetail.launchView?.startEntryDate || "";
                 const parsedDate = date ? new Date(date) : null;
                 const launchDate = parsedDate ? parsedDate.toLocaleDateString() : "";
