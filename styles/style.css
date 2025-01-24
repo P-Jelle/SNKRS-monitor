@@ -18,8 +18,9 @@ html {
 }
 
 #product-list {
-    column-count: 3;
-    column-gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
@@ -28,8 +29,6 @@ html {
 .product {
     background-color: var(--pale-gray);
     border-radius: 8px;
-    margin-bottom: 20px;
-    break-inside: avoid;
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -77,13 +76,13 @@ html {
 
 @media (max-width: 768px) {
     #product-list {
-        column-count: 2;
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 480px) {
     #product-list {
-        column-count: 1;
+        grid-template-columns: 1fr;
     }
 }
 
