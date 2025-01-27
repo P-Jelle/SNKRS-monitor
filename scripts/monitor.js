@@ -1,4 +1,5 @@
 const proxyUrl = "https://sneakermonitor.nl/backend/proxy.php?";
+// const proxyUrl = "http://localhost/GitHub/sNKRS-monitor/backend/proxy.php?";
 const apiFilter = "anchor=0&count=50&filter=marketplace(NL)&filter=language(nl)&filter=upcoming(true)&filter=channelId(010794e5-35fe-4e32-aaff-cd2c74f89d61)&filter=exclusiveAccess(true,false)&sort=effectiveStartSellDateAsc";
 
 const stockIndicator = {
@@ -29,12 +30,10 @@ fetch(proxyUrl + apiFilter, {
             return;
         }
 
-        const productList = document.getElementById("product-list");
+        const productList = document.querySelector(".product-list");
 
         products.forEach((product) => {
-            const releaseDetails = (product.productInfo || []).filter(
-                (releaseDetail) => releaseDetail.launchView && releaseDetail.merchProduct?.productType === "FOOTWEAR"
-            );
+            const releaseDetails = (product.productInfo || []).filter((releaseDetail) => releaseDetail.launchView && releaseDetail.merchProduct?.productType === "FOOTWEAR");
 
             releaseDetails.forEach((releaseDetail) => {
                 const title = releaseDetail.productContent?.title || "";
@@ -45,7 +44,7 @@ fetch(proxyUrl + apiFilter, {
                 const date = releaseDetail.launchView?.startEntryDate || "";
                 const parsedDate = date ? new Date(date) : null;
                 const launchDate = parsedDate ? parsedDate.toLocaleDateString() : "";
-                const launchTime = parsedDate ? parsedDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "";
+                const launchTime = parsedDate ? parsedDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
                 const price = releaseDetail.merchPrice?.fullPrice || "";
 
                 const slug = product.publishedContent?.properties?.seo?.slug || "";
@@ -55,7 +54,7 @@ fetch(proxyUrl + apiFilter, {
                 if (releaseDetail.skus && releaseDetail.availableGtins) {
                     stockInfo = releaseDetail.skus
                         .map((skuDetail) => {
-                            const availableGtin = releaseDetail.availableGtins.find(g => g.gtin === skuDetail.gtin);
+                            const availableGtin = releaseDetail.availableGtins.find((g) => g.gtin === skuDetail.gtin);
                             const stockLevel = availableGtin?.level || "";
                             const size = skuDetail.countrySpecifications?.[0]?.localizedSize || "";
                             const stockEmoji = stockIndicator[stockLevel.toUpperCase()] || "";
@@ -72,23 +71,20 @@ fetch(proxyUrl + apiFilter, {
                 const productDiv = document.createElement("div");
                 productDiv.classList.add("product");
                 productDiv.innerHTML = `
-                    <a href="${productUrl}" target="_blank" style="text-decoration: none; color: inherit;">
-                        <div class="details">
-                            <h2>${title}</h2>
-                            <h2>${color}</h2>
-                            <p><strong>Exclusive Access:</strong> ${exclusiveAccess}</p>
-                            <p><strong>Launch Type:</strong> ${launchType}</p>
-                            <p><strong>Launch Date:</strong> ${launchDate}</p>
-                            <p><strong>Launch Time:</strong> ${launchTime}</p>
-                            <p><strong>Price:</strong> €${price}</p>
-                            <div class="stock-info">${stockInfo}</div>
-                        </div>
+                    <a href="${productUrl}" target="_blank">
+                        <h2>${title}</h2>
+                        <h2>${color}</h2>
                         <img src="${image}" alt="${title}" />
+                        <p><strong>Exclusive Access:</strong> ${exclusiveAccess}</p>
+                        <p><strong>Launch Type:</strong> ${launchType}</p>
+                        <p><strong>Launch Date:</strong> ${launchDate}</p>
+                        <p><strong>Launch Time:</strong> ${launchTime}</p>
+                        <p><strong>Price:</strong> €${price}</p>
+                        <div class="stock-info">${stockInfo}</div>
                     </a>`;
                 productList.appendChild(productDiv);
             });
         });
-
     })
     .catch((error) => {
         console.error("Error fetching data:", error);
