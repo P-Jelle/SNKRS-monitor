@@ -40,12 +40,14 @@ fetch(proxyUrl + apiFilter, {
                 const color = product.publishedContent?.properties?.coverCard?.properties?.title || "";
                 const exclusiveAccess = releaseDetail.merchProduct?.exclusiveAccess ? "Yes" : "No";
                 const launchType = launchConverter[releaseDetail.launchView?.method] || "";
-                const image = product.publishedContent?.nodes?.[0]?.nodes?.[0]?.properties?.squarish?.url || "";
                 const date = releaseDetail.launchView?.startEntryDate || "";
                 const parsedDate = date ? new Date(date) : null;
                 const launchDate = parsedDate ? parsedDate.toLocaleDateString() : "";
                 const launchTime = parsedDate ? parsedDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
                 const price = releaseDetail.merchPrice?.fullPrice || "";
+
+                const image = product.publishedContent?.nodes?.[0]?.nodes?.[0]?.properties?.squarish?.url || "";
+                const updateImage = image.replace("t_prod_ss", "w_1280,q_auto,f_auto");
 
                 const slug = product.publishedContent?.properties?.seo?.slug || "";
                 const productUrl = `https://www.nike.com/${product.marketplace?.toLowerCase()}/launch/t/${slug}`;
@@ -74,7 +76,7 @@ fetch(proxyUrl + apiFilter, {
                     <a href="${productUrl}" target="_blank">
                         <h2>${title}</h2>
                         <h2>${color}</h2>
-                        <img src="${image}" alt="${title}" />
+                        <img src="${updateImage}" alt="${image}" />
                         <p><strong>Exclusive Access:</strong> ${exclusiveAccess}</p>
                         <p><strong>Launch Type:</strong> ${launchType}</p>
                         <p><strong>Launch Date:</strong> ${launchDate}</p>
