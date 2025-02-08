@@ -1,5 +1,5 @@
-// const proxyUrl = "https://sneakermonitor.nl/backend/proxy.php?";
-const proxyUrl = "http://localhost/GitHub/SNKRS-monitor/backend/proxy.php?";
+const proxyUrl = "https://sneakermonitor.nl/backend/proxy.php?";
+// const proxyUrl = "http://localhost/GitHub/SNKRS-monitor/backend/proxy.php?";
 const apiFilter = "anchor=0&count=50&filter=marketplace(NL)&filter=language(nl)&filter=upcoming(true)&filter=channelId(010794e5-35fe-4e32-aaff-cd2c74f89d61)&filter=exclusiveAccess(true,false)&sort=effectiveStartSellDateAsc";
 
 const stockIndicator = {
@@ -83,7 +83,7 @@ fetch(proxyUrl + apiFilter, {
                         break;
                     }
                 }
-                
+
                 const updateImage = finalImage.replace("t_prod_ss", "w_1280,q_auto,f_auto");
 
                 let stockInfo = "";
