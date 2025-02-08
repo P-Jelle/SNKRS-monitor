@@ -1,5 +1,5 @@
-const proxyUrl = "https://sneakermonitor.nl/backend/proxy.php?";
-// const proxyUrl = "http://localhost/GitHub/sNKRS-monitor/backend/proxy.php?";
+// const proxyUrl = "https://sneakermonitor.nl/backend/proxy.php?";
+const proxyUrl = "http://localhost/GitHub/SNKRS-monitor/backend/proxy.php?";
 const apiFilter = "anchor=0&count=50&filter=marketplace(NL)&filter=language(nl)&filter=upcoming(true)&filter=channelId(010794e5-35fe-4e32-aaff-cd2c74f89d61)&filter=exclusiveAccess(true,false)&sort=effectiveStartSellDateAsc";
 
 const stockIndicator = {
@@ -54,14 +54,13 @@ fetch(proxyUrl + apiFilter, {
                 const launchTime = parsedDate ? parsedDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
                 const price = releaseDetail.merchPrice?.fullPrice || "";
 
-                const image = product.publishedContent?.nodes?.[0]?.nodes?.[0]?.properties?.squarish?.url || "";
-
                 const slug = product.publishedContent?.properties?.seo?.slug || "";
                 const productUrl = `https://www.nike.com/${product.marketplace?.toLowerCase()}/launch/t/${slug}`;
 
-                const nodes = product.publishedContent?.nodes || [];
+                const image = product.publishedContent?.nodes?.[0]?.nodes?.[0]?.properties?.squarish?.url || "";
                 let finalImage = image;
-                let detectedCategory = "";
+
+                const nodes = product.publishedContent?.nodes || [];
 
                 // Should be a better way to detect kids/baby shoes
                 const skuSizes = releaseDetail.skus?.map((sku) => sku.countrySpecifications?.[0]?.localizedSize) || [];
@@ -84,6 +83,7 @@ fetch(proxyUrl + apiFilter, {
                         break;
                     }
                 }
+                
                 const updateImage = finalImage.replace("t_prod_ss", "w_1280,q_auto,f_auto");
 
                 let stockInfo = "";
