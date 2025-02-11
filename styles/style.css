@@ -46,9 +46,9 @@ html {
 .product img {
     width: 100%;
     height: auto;
-    max-height: 200px;
+    max-height: 230px;
     object-fit: cover;
-    object-position: 100% 55%;
+    object-position: 100% 50%;
     border-radius: 4px;
 }
 
