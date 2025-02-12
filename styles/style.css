@@ -49,7 +49,6 @@ html {
     max-height: 230px;
     object-fit: cover;
     object-position: 100% 45%;
-    border-radius: 4px;
 }
 
 .product p strong {
