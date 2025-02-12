@@ -88,7 +88,7 @@ fetch(proxyUrl + apiFilter, {
 
                 let stockInfo = "";
                 if (releaseDetail.skus && releaseDetail.availableGtins) {
-                    stockInfo = releaseDetail.skus
+                    stockInfo = releaseDetail.skus.reverse()
                         .map((skuDetail) => {
                             const availableGtin = releaseDetail.availableGtins.find((g) => g.gtin === skuDetail.gtin);
                             const stockLevel = availableGtin?.level || "";
