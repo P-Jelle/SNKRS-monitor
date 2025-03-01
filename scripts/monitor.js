@@ -64,7 +64,7 @@ fetch(proxyUrl + apiFilter, {
 
                 // Should be a better way to detect kids/baby shoes
                 const skuSizes = releaseDetail.skus?.map((sku) => sku.countrySpecifications?.[0]?.localizedSize) || [];
-                const isKids = skuSizes.some((size) => size && ["35.5", "32"].includes(size));
+                const isKids = skuSizes.some((size) => size && ["35", "32"].includes(size));
                 const isBaby = skuSizes.some((size) => size && ["22"].includes(size));
 
                 for (const node of nodes) {
